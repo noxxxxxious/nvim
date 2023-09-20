@@ -208,7 +208,13 @@ require('lazy').setup({
     config = function()
       require("symbols-outline").setup()
     end
-  }
+  },
+
+  {
+    "folke/twilight.nvim",
+    opts = {}
+  },
+
 }, {})
 
 -- [[ Setting options ]]
@@ -253,6 +259,9 @@ vim.o.completeopt = 'menuone,noselect'
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
 
+-- Keep cursor closer to middle of screen
+vim.opt.scrolloff = 10
+
 -- [[ Basic Keymaps ]]
 
 -- Keymaps for better default experience
@@ -272,6 +281,8 @@ vim.keymap.set('n', '<Leader>no', ':NvimTreeToggle<CR>')
 -- SymbolsOutline Toggle
 vim.keymap.set('n', '<Leader>nf', ':SymbolsOutline<CR>')
 
+-- Twilight Toggle
+vim.keymap.set('n', '<Leader>nt', ':Twilight<CR>')
 -- Bufferline hotkeys
 vim.keymap.set('n', '<Leader><Tab>1', ':BufferLineGoToBuffer 1<CR>')
 vim.keymap.set('n', '<Leader><Tab>2', ':BufferLineGoToBuffer 2<CR>')
@@ -284,6 +295,7 @@ vim.keymap.set('n', '<Leader><Tab>8', ':BufferLineGoToBuffer 8<CR>')
 vim.keymap.set('n', '<Leader><Tab>9', ':BufferLineGoToBuffer 9<CR>')
 vim.keymap.set('n', '<Leader><Tab>0', ':BufferLineGoToBuffer 10<CR>')
 vim.keymap.set('n', '<Leader><Tab>c', ':BufferLinePickClose<CR>')
+
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
