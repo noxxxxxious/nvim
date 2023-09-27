@@ -45,6 +45,18 @@ require('lazy').setup({
       { 'williamboman/mason.nvim', config = true },
       'williamboman/mason-lspconfig.nvim',
 
+      {
+        'smiteshp/nvim-navbuddy',
+        dependencies = {
+          'smiteshp/nvim-navic',
+          'muniftanjim/nui.nvim'
+        },
+        opts = {
+          lsp = {
+            auto_attach = true
+          }
+        }
+      },
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
       { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
@@ -104,14 +116,29 @@ require('lazy').setup({
   },
 
   {
+    'gosukiwi/vim-atom-dark',
+    priority = 1000,
+  },
+
+  {
     'nyoom-engineering/oxocarbon.nvim',
     priority = 1000,
+  },
+
+  {
+    'axvr/photon.vim',
+    priority = 1000,
     config = function()
-      vim.cmd.colorscheme 'oxocarbon'
+      vim.cmd.colorscheme 'photon'
     end
   },
 
-  { 
+  {
+    'olivercederborg/poimandres.nvim',
+    priority = 1000,
+  },
+
+  {
     'windwp/nvim-autopairs',
     event = "InsertEnter",
     opts = {}
@@ -211,10 +238,23 @@ require('lazy').setup({
   },
 
   {
-    "folke/twilight.nvim",
-    opts = {}
+    "ray-x/lsp_signature.nvim",
+    event = "VeryLazy",
+    opts = {},
+    config = function(_, opts)
+      require("lsp_signature").setup(opts)
+    end,
   },
 
+  {
+    "m4xshen/hardtime.nvim",
+    dependencies = { "muniftanjim/nui.nvim", "nvim-lua/plenary.nvim"},
+    opts = {},
+  },
+
+  {
+    "nvim-treesitter/playground",
+  },
 }, {})
 
 -- [[ Setting options ]]
@@ -259,9 +299,6 @@ vim.o.completeopt = 'menuone,noselect'
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
 
--- Keep cursor closer to middle of screen
-vim.opt.scrolloff = 10
-
 -- [[ Basic Keymaps ]]
 
 -- Keymaps for better default experience
@@ -275,14 +312,18 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 -- Hotkey to get to config faster
 vim.keymap.set('n', '<Leader>nc', ':e ~/.config/nvim/init.lua<CR>')
 
+-- Easier Ctrl + w access through a melody instead of a chord
+vim.keymap.set('n', '<Leader>cw', '<C-w>')
+
 -- NvimTree Toggle
 vim.keymap.set('n', '<Leader>no', ':NvimTreeToggle<CR>')
 
 -- SymbolsOutline Toggle
 vim.keymap.set('n', '<Leader>nf', ':SymbolsOutline<CR>')
 
--- Twilight Toggle
-vim.keymap.set('n', '<Leader>nt', ':Twilight<CR>')
+-- Open Navbuddy
+vim.keymap.set('n', '<Leader>nj', ':Navbuddy<CR>')
+
 -- Bufferline hotkeys
 vim.keymap.set('n', '<Leader><Tab>1', ':BufferLineGoToBuffer 1<CR>')
 vim.keymap.set('n', '<Leader><Tab>2', ':BufferLineGoToBuffer 2<CR>')
@@ -295,7 +336,6 @@ vim.keymap.set('n', '<Leader><Tab>8', ':BufferLineGoToBuffer 8<CR>')
 vim.keymap.set('n', '<Leader><Tab>9', ':BufferLineGoToBuffer 9<CR>')
 vim.keymap.set('n', '<Leader><Tab>0', ':BufferLineGoToBuffer 10<CR>')
 vim.keymap.set('n', '<Leader><Tab>c', ':BufferLinePickClose<CR>')
-
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
@@ -432,7 +472,7 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 
 -- [[ Configure LSP ]]
 --  This function gets run when an LSP connects to a particular buffer.
-local on_attach = function(_, bufnr)
+local on_attach = function(client, bufnr)
   -- NOTE: Remember that lua is a real programming language, and as such it is possible
   -- to define small helper and utility functions so you don't have to repeat yourself
   -- many times.
@@ -487,9 +527,10 @@ local servers = {
   -- clangd = {},
   -- gopls = {},
   -- pyright = {},
-  -- rust_analyzer = {},
-  -- tsserver = {},
-  -- html = { filetypes = { 'html', 'twig', 'hbs'} },
+rust_analyzer = {},
+tsserver = {},
+vuels = {},
+html = { filetypes = { 'html', 'twig', 'hbs'} },
 
   lua_ls = {
     Lua = {
@@ -512,6 +553,7 @@ local mason_lspconfig = require 'mason-lspconfig'
 mason_lspconfig.setup {
   ensure_installed = vim.tbl_keys(servers),
 }
+
 
 mason_lspconfig.setup_handlers {
   function(server_name)
@@ -574,3 +616,7 @@ cmp.setup {
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+
+
+-- Nox settings
+vim.opt.scrolloff = 10
