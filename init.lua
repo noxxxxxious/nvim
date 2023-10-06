@@ -32,9 +32,6 @@ require('lazy').setup({
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
 
-  -- Detect tabstop and shiftwidth automatically
-  'tpope/vim-sleuth',
-
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
   {
@@ -161,11 +158,12 @@ require('lazy').setup({
   {
     -- Add indentation guides even on blank lines
     'lukas-reineke/indent-blankline.nvim',
-    -- Enable `lukas-reineke/indent-blankline.nvim`
-    -- See `:help indent_blankline.txt`
+    main = "ibl",
     opts = {
-      char = '┃',
-      show_trailing_blankline_indent = false,
+      debounce = 100,
+      indent = {
+        char = '┃',
+      }
     },
   },
 
@@ -247,12 +245,6 @@ require('lazy').setup({
   },
 
   {
-    "m4xshen/hardtime.nvim",
-    dependencies = { "muniftanjim/nui.nvim", "nvim-lua/plenary.nvim"},
-    opts = {},
-  },
-
-  {
     "nvim-treesitter/playground",
   },
 }, {})
@@ -267,6 +259,10 @@ vim.o.hlsearch = false
 -- Make line numbers default
 vim.wo.number = true
 vim.wo.relativenumber = true
+
+-- Set tabstop to 4 spaces
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
 
 -- Enable mouse mode
 vim.o.mouse = 'a'
@@ -373,7 +369,6 @@ require('bufferline').setup {
       },
     },
   },
-  
 }
 
 -- Enable telescope fzf native, if installed
