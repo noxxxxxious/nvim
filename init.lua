@@ -260,9 +260,9 @@ vim.o.hlsearch = false
 vim.wo.number = true
 vim.wo.relativenumber = true
 
--- Set tabstop to 4 spaces
-vim.opt.tabstop = 4
-vim.opt.shiftwidth = 4
+-- Set tabstop to 2 spaces
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
 
 -- Enable mouse mode
 vim.o.mouse = 'a'
