@@ -247,6 +247,11 @@ require('lazy').setup({
   {
     "nvim-treesitter/playground",
   },
+
+  {
+    'simrat39/rust-tools.nvim',
+    opts = {}
+  }
 }, {})
 
 -- [[ Setting options ]]
@@ -331,7 +336,7 @@ vim.keymap.set('n', '<Leader><Tab>7', ':BufferLineGoToBuffer 7<CR>')
 vim.keymap.set('n', '<Leader><Tab>8', ':BufferLineGoToBuffer 8<CR>')
 vim.keymap.set('n', '<Leader><Tab>9', ':BufferLineGoToBuffer 9<CR>')
 vim.keymap.set('n', '<Leader><Tab>0', ':BufferLineGoToBuffer 10<CR>')
-vim.keymap.set('n', '<Leader><Tab>c', ':BufferLinePickClose<CR>')
+vim.keymap.set('n', '<Leader><Tab>q', ':BufferLinePickClose<CR>')
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
@@ -524,6 +529,7 @@ local servers = {
   -- pyright = {},
 rust_analyzer = {},
 tsserver = {},
+cssls = {},
 vuels = {},
 html = { filetypes = { 'html', 'twig', 'hbs'} },
 
