@@ -120,14 +120,14 @@ require('lazy').setup({
   {
     'nyoom-engineering/oxocarbon.nvim',
     priority = 1000,
+    config = function()
+      vim.cmd.colorscheme 'oxocarbon'
+    end
   },
 
   {
     'axvr/photon.vim',
     priority = 1000,
-    config = function()
-      vim.cmd.colorscheme 'photon'
-    end
   },
 
   {
