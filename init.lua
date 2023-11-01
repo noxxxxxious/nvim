@@ -593,6 +593,7 @@ vim.keymap.set('n', '<Leader><Tab>7', ':BufferLineGoToBuffer 7<CR>')
 vim.keymap.set('n', '<Leader><Tab>8', ':BufferLineGoToBuffer 8<CR>')
 vim.keymap.set('n', '<Leader><Tab>9', ':BufferLineGoToBuffer 9<CR>')
 vim.keymap.set('n', '<Leader><Tab>0', ':BufferLineGoToBuffer 10<CR>')
+vim.keymap.set('n', '<Leader><Tab>q', ':BufferLinePickClose<CR>')
 
 -- Inlay Hints
 if vim.lsp.inlay_hint then
@@ -616,4 +617,3 @@ require('bufferline').setup {
     },
   },
 }
-vim.keymap.set('n', '<Leader><Tab>q', ':BufferLinePickClose<CR>')
