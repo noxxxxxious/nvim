@@ -39,21 +39,9 @@ require('lazy').setup({
     'neovim/nvim-lspconfig',
     dependencies = {
       -- Automatically install LSPs to stdpath for neovim
-      { 'williamboman/mason.nvim', config = true },
+      'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
 
-      {
-        'smiteshp/nvim-navbuddy',
-        dependencies = {
-          'smiteshp/nvim-navic',
-          'muniftanjim/nui.nvim'
-        },
-        opts = {
-          lsp = {
-            auto_attach = true
-          }
-        }
-      },
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
       { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
@@ -98,47 +86,35 @@ require('lazy').setup({
 
         -- don't override the built-in and fugitive keymaps
         local gs = package.loaded.gitsigns
-        vim.keymap.set({'n', 'v'}, ']c', function()
-          if vim.wo.diff then return ']c' end
-          vim.schedule(function() gs.next_hunk() end)
+        vim.keymap.set({ 'n', 'v' }, ']c', function()
+          if vim.wo.diff then
+            return ']c'
+          end
+          vim.schedule(function()
+            gs.next_hunk()
+          end)
           return '<Ignore>'
-        end, {expr=true, buffer = bufnr, desc = "Jump to next hunk"})
-        vim.keymap.set({'n', 'v'}, '[c', function()
-          if vim.wo.diff then return '[c' end
-          vim.schedule(function() gs.prev_hunk() end)
+        end, { expr = true, buffer = bufnr, desc = 'Jump to next hunk' })
+        vim.keymap.set({ 'n', 'v' }, '[c', function()
+          if vim.wo.diff then
+            return '[c'
+          end
+          vim.schedule(function()
+            gs.prev_hunk()
+          end)
           return '<Ignore>'
-        end, {expr=true, buffer = bufnr, desc = "Jump to previous hunk"})
+        end, { expr = true, buffer = bufnr, desc = 'Jump to previous hunk' })
       end,
     },
   },
 
   {
-    'gosukiwi/vim-atom-dark',
-    priority = 1000,
-  },
-
-  {
+    -- Theme inspired by Atom
     'nyoom-engineering/oxocarbon.nvim',
     priority = 1000,
     config = function()
       vim.cmd.colorscheme 'oxocarbon'
-    end
-  },
-
-  {
-    'axvr/photon.vim',
-    priority = 1000,
-  },
-
-  {
-    'olivercederborg/poimandres.nvim',
-    priority = 1000,
-  },
-
-  {
-    'windwp/nvim-autopairs',
-    event = "InsertEnter",
-    opts = {}
+    end,
   },
 
   {
@@ -148,8 +124,8 @@ require('lazy').setup({
     opts = {
       options = {
         icons_enabled = false,
-        theme = 'onedark',
-        component_separators = '|',
+        theme = 'auto',
+        component_separators = '┃',
         section_separators = '',
       },
     },
@@ -158,9 +134,10 @@ require('lazy').setup({
   {
     -- Add indentation guides even on blank lines
     'lukas-reineke/indent-blankline.nvim',
-    main = "ibl",
+    -- Enable `lukas-reineke/indent-blankline.nvim`
+    -- See `:help ibl`
+    main = 'ibl',
     opts = {
-      debounce = 100,
       indent = {
         char = '┃',
       }
@@ -227,14 +204,6 @@ require('lazy').setup({
       require("nvim-tree").setup {}
     end,
   },
-
-  {
-    "simrat39/symbols-outline.nvim",
-    config = function()
-      require("symbols-outline").setup()
-    end
-  },
-
   {
     "ray-x/lsp_signature.nvim",
     event = "VeryLazy",
@@ -243,15 +212,6 @@ require('lazy').setup({
       require("lsp_signature").setup(opts)
     end,
   },
-
-  {
-    "nvim-treesitter/playground",
-  },
-
-  {
-    'simrat39/rust-tools.nvim',
-    opts = {}
-  }
 }, {})
 
 -- [[ Setting options ]]
@@ -263,11 +223,6 @@ vim.o.hlsearch = false
 
 -- Make line numbers default
 vim.wo.number = true
-vim.wo.relativenumber = true
-
--- Set tabstop to 2 spaces
-vim.opt.tabstop = 2
-vim.opt.shiftwidth = 2
 
 -- Enable mouse mode
 vim.o.mouse = 'a'
@@ -310,34 +265,6 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
--- Hotkey to get to config faster
-vim.keymap.set('n', '<Leader>nc', ':e ~/.config/nvim/init.lua<CR>')
-
--- Easier Ctrl + w access through a melody instead of a chord
-vim.keymap.set('n', '<Leader>cw', '<C-w>')
-
--- NvimTree Toggle
-vim.keymap.set('n', '<Leader>no', ':NvimTreeToggle<CR>')
-
--- SymbolsOutline Toggle
-vim.keymap.set('n', '<Leader>nf', ':SymbolsOutline<CR>')
-
--- Open Navbuddy
-vim.keymap.set('n', '<Leader>nj', ':Navbuddy<CR>')
-
--- Bufferline hotkeys
-vim.keymap.set('n', '<Leader><Tab>1', ':BufferLineGoToBuffer 1<CR>')
-vim.keymap.set('n', '<Leader><Tab>2', ':BufferLineGoToBuffer 2<CR>')
-vim.keymap.set('n', '<Leader><Tab>3', ':BufferLineGoToBuffer 3<CR>')
-vim.keymap.set('n', '<Leader><Tab>4', ':BufferLineGoToBuffer 4<CR>')
-vim.keymap.set('n', '<Leader><Tab>5', ':BufferLineGoToBuffer 5<CR>')
-vim.keymap.set('n', '<Leader><Tab>6', ':BufferLineGoToBuffer 6<CR>')
-vim.keymap.set('n', '<Leader><Tab>7', ':BufferLineGoToBuffer 7<CR>')
-vim.keymap.set('n', '<Leader><Tab>8', ':BufferLineGoToBuffer 8<CR>')
-vim.keymap.set('n', '<Leader><Tab>9', ':BufferLineGoToBuffer 9<CR>')
-vim.keymap.set('n', '<Leader><Tab>0', ':BufferLineGoToBuffer 10<CR>')
-vim.keymap.set('n', '<Leader><Tab>q', ':BufferLinePickClose<CR>')
-
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
@@ -357,20 +284,6 @@ require('telescope').setup {
       i = {
         ['<C-u>'] = false,
         ['<C-d>'] = false,
-      },
-    },
-  },
-}
-
--- Bufferline setup
-require('bufferline').setup {
-  options = {
-    offsets = {
-      {
-        filetype = "NvimTree",
-        text = "File Explorer",
-        text_align = "center",
-        separator = true
       },
     },
   },
@@ -396,73 +309,76 @@ vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
 vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
-vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]resume' })
+vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
-require('nvim-treesitter.configs').setup {
-  -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim' },
+-- Defer Treesitter setup after first render to improve startup time of 'nvim {filename}'
+vim.defer_fn(function()
+  require('nvim-treesitter.configs').setup {
+    -- Add languages to be installed here that you want installed for treesitter
+    ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash' },
 
-  -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
-  auto_install = false,
+    -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
+    auto_install = false,
 
-  highlight = { enable = true },
-  indent = { enable = true },
-  incremental_selection = {
-    enable = true,
-    keymaps = {
-      init_selection = '<c-space>',
-      node_incremental = '<c-space>',
-      scope_incremental = '<c-s>',
-      node_decremental = '<M-space>',
-    },
-  },
-  textobjects = {
-    select = {
+    highlight = { enable = true },
+    indent = { enable = true },
+    incremental_selection = {
       enable = true,
-      lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
       keymaps = {
-        -- You can use the capture groups defined in textobjects.scm
-        ['aa'] = '@parameter.outer',
-        ['ia'] = '@parameter.inner',
-        ['af'] = '@function.outer',
-        ['if'] = '@function.inner',
-        ['ac'] = '@class.outer',
-        ['ic'] = '@class.inner',
+        init_selection = '<c-space>',
+        node_incremental = '<c-space>',
+        scope_incremental = '<c-s>',
+        node_decremental = '<M-space>',
       },
     },
-    move = {
-      enable = true,
-      set_jumps = true, -- whether to set jumps in the jumplist
-      goto_next_start = {
-        [']m'] = '@function.outer',
-        [']]'] = '@class.outer',
+    textobjects = {
+      select = {
+        enable = true,
+        lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
+        keymaps = {
+          -- You can use the capture groups defined in textobjects.scm
+          ['aa'] = '@parameter.outer',
+          ['ia'] = '@parameter.inner',
+          ['af'] = '@function.outer',
+          ['if'] = '@function.inner',
+          ['ac'] = '@class.outer',
+          ['ic'] = '@class.inner',
+        },
       },
-      goto_next_end = {
-        [']M'] = '@function.outer',
-        [']['] = '@class.outer',
+      move = {
+        enable = true,
+        set_jumps = true, -- whether to set jumps in the jumplist
+        goto_next_start = {
+          [']m'] = '@function.outer',
+          [']]'] = '@class.outer',
+        },
+        goto_next_end = {
+          [']M'] = '@function.outer',
+          [']['] = '@class.outer',
+        },
+        goto_previous_start = {
+          ['[m'] = '@function.outer',
+          ['[['] = '@class.outer',
+        },
+        goto_previous_end = {
+          ['[M'] = '@function.outer',
+          ['[]'] = '@class.outer',
+        },
       },
-      goto_previous_start = {
-        ['[m'] = '@function.outer',
-        ['[['] = '@class.outer',
-      },
-      goto_previous_end = {
-        ['[M'] = '@function.outer',
-        ['[]'] = '@class.outer',
+      swap = {
+        enable = true,
+        swap_next = {
+          ['<leader>a'] = '@parameter.inner',
+        },
+        swap_previous = {
+          ['<leader>A'] = '@parameter.inner',
+        },
       },
     },
-    swap = {
-      enable = true,
-      swap_next = {
-        ['<leader>a'] = '@parameter.inner',
-      },
-      swap_previous = {
-        ['<leader>A'] = '@parameter.inner',
-      },
-    },
-  },
-}
+  }
+end, 0)
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
@@ -472,7 +388,7 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 
 -- [[ Configure LSP ]]
 --  This function gets run when an LSP connects to a particular buffer.
-local on_attach = function(client, bufnr)
+local on_attach = function(_, bufnr)
   -- NOTE: Remember that lua is a real programming language, and as such it is possible
   -- to define small helper and utility functions so you don't have to repeat yourself
   -- many times.
@@ -490,10 +406,10 @@ local on_attach = function(client, bufnr)
   nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
   nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
-  nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
+  nmap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
   nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
   nmap('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
-  nmap('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
+  nmap('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
   nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
   nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
@@ -515,6 +431,22 @@ local on_attach = function(client, bufnr)
   end, { desc = 'Format current buffer with LSP' })
 end
 
+-- document existing key chains
+require('which-key').register {
+  ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
+  ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
+  ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
+  ['<leader>h'] = { name = 'More git', _ = 'which_key_ignore' },
+  ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
+  ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
+  ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
+}
+
+-- mason-lspconfig requires that these setup functions are called in this order
+-- before setting up the servers.
+require('mason').setup()
+require('mason-lspconfig').setup()
+
 -- Enable the following language servers
 --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
 --
@@ -527,16 +459,28 @@ local servers = {
   -- clangd = {},
   -- gopls = {},
   -- pyright = {},
-rust_analyzer = {},
-tsserver = {},
-cssls = {},
-vuels = {},
-html = { filetypes = { 'html', 'twig', 'hbs'} },
+  rust_analyzer = {
+		hint = { enable = true },
+	},
+  tsserver = {},
+  html = { filetypes = { 'html', 'twig', 'hbs'} },
+	bashls = {},
+	cssls = {},
+	dotls = {},
+	emmet_ls = {},
+	jsonls = {},
+	marksman = {},
+	powershell_es = {},
+	taplo = {},
+	volar = {},
+	lemminx = {},
+	yamlls = {},
 
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
       telemetry = { enable = false },
+			hint = { enable = true },
     },
   },
 }
@@ -555,7 +499,6 @@ mason_lspconfig.setup {
   ensure_installed = vim.tbl_keys(servers),
 }
 
-
 mason_lspconfig.setup_handlers {
   function(server_name)
     require('lspconfig')[server_name].setup {
@@ -564,7 +507,7 @@ mason_lspconfig.setup_handlers {
       settings = servers[server_name],
       filetypes = (servers[server_name] or {}).filetypes,
     }
-  end
+  end,
 }
 
 -- [[ Configure nvim-cmp ]]
@@ -615,9 +558,62 @@ cmp.setup {
   },
 }
 
--- The line beneath this is called `modeline`. See `:help modeline`
--- vim: ts=2 sts=2 sw=2 et
+-- NOX SETTINGS
+-- Make line numbers default
+vim.wo.number = true
+vim.wo.relativenumber = true
 
+-- Set tabstop to 2 spaces
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
 
--- Nox settings
-vim.opt.scrolloff = 10
+-- Hotkey to get to config faster
+vim.keymap.set('n', '<Leader>nc', ':e ~/.config/nvim/init.lua<CR>')
+
+-- Easier Ctrl + w access through a melody instead of a chord
+vim.keymap.set('n', '<Leader>cw', '<C-w>')
+
+-- NvimTree Toggle
+vim.keymap.set('n', '<Leader>no', ':NvimTreeToggle<CR>')
+
+-- SymbolsOutline Toggle
+vim.keymap.set('n', '<Leader>nf', ':SymbolsOutline<CR>')
+
+-- Open Navbuddy
+vim.keymap.set('n', '<Leader>nj', ':Navbuddy<CR>')
+
+-- Bufferline hotkeys
+vim.keymap.set('n', '<Leader><Tab>1', ':BufferLineGoToBuffer 1<CR>')
+vim.keymap.set('n', '<Leader><Tab>2', ':BufferLineGoToBuffer 2<CR>')
+vim.keymap.set('n', '<Leader><Tab>3', ':BufferLineGoToBuffer 3<CR>')
+vim.keymap.set('n', '<Leader><Tab>4', ':BufferLineGoToBuffer 4<CR>')
+vim.keymap.set('n', '<Leader><Tab>5', ':BufferLineGoToBuffer 5<CR>')
+vim.keymap.set('n', '<Leader><Tab>6', ':BufferLineGoToBuffer 6<CR>')
+vim.keymap.set('n', '<Leader><Tab>7', ':BufferLineGoToBuffer 7<CR>')
+vim.keymap.set('n', '<Leader><Tab>8', ':BufferLineGoToBuffer 8<CR>')
+vim.keymap.set('n', '<Leader><Tab>9', ':BufferLineGoToBuffer 9<CR>')
+vim.keymap.set('n', '<Leader><Tab>0', ':BufferLineGoToBuffer 10<CR>')
+
+-- Inlay Hints
+if vim.lsp.inlay_hint then
+	vim.keymap.set('n', '<Leader>sh', function() vim.lsp.inlay_hint(0, nil) end, { desc = "Toggle Inlay Hints" })
+end
+
+-- Setups 
+-- Bufferline setup
+require('bufferline').setup {
+  options = {
+		numbers = function(opts)
+			return string.format('%s]', opts.ordinal)
+		end,
+    offsets = {
+      {
+        filetype = "NvimTree",
+        text = "NOXXXXXPLORER",
+        text_align = "center",
+        separator = true
+      },
+    },
+  },
+}
+vim.keymap.set('n', '<Leader><Tab>q', ':BufferLinePickClose<CR>')
