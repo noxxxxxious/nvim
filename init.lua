@@ -212,6 +212,10 @@ require('lazy').setup({
       require("lsp_signature").setup(opts)
     end,
   },
+	{
+		"windwp/nvim-autopairs",
+		opts = {},
+	}
 }, {})
 
 -- [[ Setting options ]]
@@ -462,7 +466,31 @@ local servers = {
   rust_analyzer = {
 		hint = { enable = true },
 	},
-  tsserver = {},
+  tsserver = {
+    -- taken from https://github.com/typescript-language-server/typescript-language-server#workspacedidchangeconfiguration
+    javascript = {
+      inlayHints = {
+        includeInlayEnumMemberValueHints = true,
+        includeInlayFunctionLikeReturnTypeHints = true,
+        includeInlayFunctionParameterTypeHints = true,
+        includeInlayParameterNameHints = 'all',
+        includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+        includeInlayPropertyDeclarationTypeHints = true,
+        includeInlayVariableTypeHints = true,
+      },
+    },
+    typescript = {
+      inlayHints = {
+        includeInlayEnumMemberValueHints = true,
+        includeInlayFunctionLikeReturnTypeHints = true,
+        includeInlayFunctionParameterTypeHints = true,
+        includeInlayParameterNameHints = 'all',
+        includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+        includeInlayPropertyDeclarationTypeHints = true,
+        includeInlayVariableTypeHints = true,
+      },
+    },
+  },
   html = { filetypes = { 'html', 'twig', 'hbs'} },
 	bashls = {},
 	cssls = {},
@@ -576,11 +604,9 @@ vim.keymap.set('n', '<Leader>cw', '<C-w>')
 -- NvimTree Toggle
 vim.keymap.set('n', '<Leader>no', ':NvimTreeToggle<CR>')
 
--- SymbolsOutline Toggle
-vim.keymap.set('n', '<Leader>nf', ':SymbolsOutline<CR>')
-
--- Open Navbuddy
-vim.keymap.set('n', '<Leader>nj', ':Navbuddy<CR>')
+-- Easy splits
+vim.keymap.set('n', '<Leader>sl', ':vsplit<CR>')
+vim.keymap.set('n', '<Leader>sj', ':split<CR>')
 
 -- Bufferline hotkeys
 vim.keymap.set('n', '<Leader><Tab>1', ':BufferLineGoToBuffer 1<CR>')
