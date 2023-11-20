@@ -6,6 +6,8 @@ vim.opt.relativenumber = true
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 
+vim.opt.scrolloff = 15
+
 vim.o.termguicolors = true
 
 -- Set highlight on search
