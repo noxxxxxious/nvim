@@ -72,5 +72,5 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 -- Inlay Hints
 if vim.lsp.inlay_hint then
-	vim.keymap.set('n', '<Leader>nh', function() vim.lsp.inlay_hint(0, nil) end, { desc = "toggle inlay [h]ints" })
+	vim.keymap.set('n', '<Leader>nh', function() vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled(0)) end, { desc = "toggle inlay [h]ints" })
 end
