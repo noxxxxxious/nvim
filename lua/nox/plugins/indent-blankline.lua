@@ -4,6 +4,9 @@ return {
   opts = {
 		indent = {
 			char = "┃"
+		},
+		exclude = {
+			filetypes = {"dashboard"}
 		}
 	},
 }
