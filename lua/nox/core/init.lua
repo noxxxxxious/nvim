@@ -6,7 +6,7 @@ vim.opt.relativenumber = true
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 
-vim.opt.scrolloff = 15
+vim.opt.scrolloff = 8
 
 vim.o.termguicolors = true
 
