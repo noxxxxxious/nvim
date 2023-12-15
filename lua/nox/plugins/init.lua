@@ -1,5 +1,4 @@
 return {
-	"tpope/vim-fugitive",
 	"tpope/vim-rhubarb",
 	{"windwp/nvim-autopairs", opts = {}},
 	{"nvim-lualine/lualine.nvim",	opts = {}},
