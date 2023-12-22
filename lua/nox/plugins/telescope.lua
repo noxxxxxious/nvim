@@ -18,6 +18,11 @@ return {
 	},
 	config = function()
 		local telescope = require("telescope")
+		telescope.setup{
+			defaults = {
+				file_ignore_patterns = { ".*%.png", ".*%.webp" }
+			}
+		}
 		pcall(telescope.load_extension, 'fzf')
 
 		vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
