@@ -30,5 +30,8 @@ return {
 		vim.keymap.set('n', '<Leader><Tab>9', ':BufferLineGoToBuffer 9<CR>')
 		vim.keymap.set('n', '<Leader><Tab>0', ':BufferLineGoToBuffer 10<CR>')
 		vim.keymap.set('n', '<Leader><Tab>q', ':BufferLinePickClose<CR>')
+		vim.keymap.set('n', '<Leader><Tab>cl', ':BufferLineCloseLeft<CR>')
+		vim.keymap.set('n', '<Leader><Tab>cr', ':BufferLineCloseRight<CR>')
+		vim.keymap.set('n', '<Leader><Tab>cr', ':BufferLineCloseOthers<CR>')
 	end,
 }
