@@ -12,7 +12,7 @@ return {
 		vim.g.loaded_netrwPlugin = 1
 
 		vim.keymap.set('n', '<Leader>no', ':NvimTreeToggle<CR>')
-		vim.keymap.set('n', '<Leader>na', ':NvimTreeResize -10<CR>')
-		vim.keymap.set('n', '<Leader>nd', ':NvimTreeResize +10<CR>')
+		vim.keymap.set('n', '<Leader>nta', ':NvimTreeResize -10<CR>')
+		vim.keymap.set('n', '<Leader>ntd', ':NvimTreeResize +10<CR>')
 	end,
 }
