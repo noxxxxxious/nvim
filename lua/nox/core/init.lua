@@ -1,17 +1,22 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+vim.g.have_nerd_font = true
+
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 
-vim.opt.scrolloff = 8
+vim.opt.showmode = false
+
+vim.opt.scrolloff = 10
 
 vim.o.termguicolors = true
 
 -- Set highlight on search
-vim.o.hlsearch = false
+vim.o.hlsearch = true
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Make line numbers default
 vim.wo.number = true
@@ -40,8 +45,8 @@ vim.o.breakindent = true
 
 -- Save undo history
 vim.o.undofile = true
--- Easy window moving
-vim.keymap.set("n", "<Leader>cw", "<C-w>")
+
+vim.opt.cursorline = true
 
 -- Easy splits
 vim.keymap.set('n', '<Leader>sl', ':vsplit<CR>')
@@ -71,6 +76,12 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   group = highlight_group,
   pattern = '*',
 })
+
+-- Easy window moving
+vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
+vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
+vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
+vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- Inlay Hints
 if vim.lsp.inlay_hint then
