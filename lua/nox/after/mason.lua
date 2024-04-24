@@ -47,7 +47,6 @@ local servers = {
 	bashls = {},
 	cssls = {},
 	dotls = {},
-	emmet_ls = {},
 	jsonls = {},
 	marksman = {},
 	powershell_es = {},
@@ -78,11 +77,18 @@ mason_lspconfig.setup {
 
 mason_lspconfig.setup_handlers {
   function(server_name)
-    require('lspconfig')[server_name].setup {
-      capabilities = capabilities,
-      on_attach = on_attach,
-      settings = servers[server_name],
-      filetypes = (servers[server_name] or {}).filetypes,
-    }
+		if require'neoconf'.get(server_name .. ".disable") then
+			return
+		end
+		local server_config = {
+			capabilities = capabilities,
+			on_attach = on_attach,
+			settings = servers[server_name],
+			filetypes = (servers[server_name] or {}).filetypes,
+		}
+		if server_name == "volar" then
+			server_config.filetypes = { 'vue', 'typescript', 'javascript' }
+		end
+    require('lspconfig')[server_name].setup(server_config)
   end,
 }
