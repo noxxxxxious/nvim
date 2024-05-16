@@ -4,6 +4,7 @@ return {
 		{ 'williamboman/mason.nvim', config = true }, -- NOTE: Must be loaded before dependants
 		'williamboman/mason-lspconfig.nvim',
 		'WhoIsSethDaniel/mason-tool-installer.nvim',
+		"jose-elias-alvarez/typescript.nvim",
 
 		-- Useful status updates for LSP.
 		-- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
@@ -113,7 +114,9 @@ return {
 				hint = { enable = true },
 			},
 			tsserver = {
-				-- taken from https://github.com/typescript-language-server/typescript-language-server#workspacedidchangeconfiguration
+				inlay_hints = {
+					enabled = true,
+				},
 				javascript = {
 					inlayHints = {
 						includeInlayEnumMemberValueHints = true,

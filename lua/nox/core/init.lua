@@ -85,5 +85,21 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 
 -- Inlay Hints
 if vim.lsp.inlay_hint then
-	vim.keymap.set('n', '<Leader>nh', function() vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled(0)) end, { desc = "toggle inlay [h]ints" })
+	vim.keymap.set('n', '<Leader>nh', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled) end, { desc = "toggle inlay [h]ints" })
 end
+
+-- Turn off normal diagnostics because using lsp_lines
+vim.diagnostic.config({
+	virtual_text = false,
+})
+
+--IDE MODE ENGAGE
+vim.keymap.set('n', 'nco', ':NvimTreeOpen<CR>:OutlineOpen<CR>', { desc = 'Open the command center' })
+vim.keymap.set('n', 'ncc', ':NvimTreeClose<CR>:OutlineClose<CR>', { desc = 'Close the command center' })
+vim.keymap.set('n', 'nct', function()
+	local current_window = vim.api.nvim_get_current_win()
+	vim.api.nvim_command("NvimTreeToggle")
+	vim.api.nvim_command("Outline")
+	vim.api.nvim_set_current_win(current_window)
+end, { desc = 'Toggle the command center' })
+

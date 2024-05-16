@@ -1,6 +1,7 @@
 return {
 	'nvim-telescope/telescope.nvim',
-	branch = '0.1.x',
+	-- branch = '0.1.x',
+	commit = '35f94f0',
 	dependencies = {
 		'nvim-lua/plenary.nvim',
 		-- Fuzzy Finder Algorithm which requires local dependencies to be built.
@@ -20,7 +21,12 @@ return {
 		local telescope = require("telescope")
 		telescope.setup{
 			defaults = {
-				file_ignore_patterns = { ".*%.png", ".*%.webp" }
+				file_ignore_patterns = { ".*%.png", ".*%.webp" },
+				path_display = {
+					filename_first = {
+						reverse_directories = false
+					}
+				},
 			}
 		}
 		pcall(telescope.load_extension, 'fzf')
