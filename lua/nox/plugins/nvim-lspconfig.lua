@@ -110,34 +110,13 @@ return {
 
 		-- Enable the following language servers
 		local servers = {
+			clangd = {},
 			rust_analyzer = {
 				hint = { enable = true },
 			},
 			tsserver = {
 				inlay_hints = {
 					enabled = true,
-				},
-				javascript = {
-					inlayHints = {
-						includeInlayEnumMemberValueHints = true,
-						includeInlayFunctionLikeReturnTypeHints = true,
-						includeInlayFunctionParameterTypeHints = true,
-						includeInlayParameterNameHints = 'all',
-						includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-						includeInlayPropertyDeclarationTypeHints = true,
-						includeInlayVariableTypeHints = true,
-					},
-				},
-				typescript = {
-					inlayHints = {
-						includeInlayEnumMemberValueHints = true,
-						includeInlayFunctionLikeReturnTypeHints = true,
-						includeInlayFunctionParameterTypeHints = true,
-						includeInlayParameterNameHints = 'all',
-						includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-						includeInlayPropertyDeclarationTypeHints = true,
-						includeInlayVariableTypeHints = true,
-					},
 				},
 			},
 			html = { filetypes = { 'html', 'twig', 'hbs'} },

@@ -94,9 +94,9 @@ vim.diagnostic.config({
 })
 
 --IDE MODE ENGAGE
-vim.keymap.set('n', 'nco', ':NvimTreeOpen<CR>:OutlineOpen<CR>', { desc = 'Open the command center' })
-vim.keymap.set('n', 'ncc', ':NvimTreeClose<CR>:OutlineClose<CR>', { desc = 'Close the command center' })
-vim.keymap.set('n', 'nct', function()
+vim.keymap.set('n', '<Leader>nco', ':NvimTreeOpen<CR>:OutlineOpen<CR>', { desc = 'Open the command center' })
+vim.keymap.set('n', '<Leader>ncc', ':NvimTreeClose<CR>:OutlineClose<CR>', { desc = 'Close the command center' })
+vim.keymap.set('n', '<Leader>nct', function()
 	local current_window = vim.api.nvim_get_current_win()
 	vim.api.nvim_command("NvimTreeToggle")
 	vim.api.nvim_command("Outline")
