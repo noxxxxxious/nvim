@@ -85,7 +85,7 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 
 -- Inlay Hints
 if vim.lsp.inlay_hint then
-	vim.keymap.set('n', '<Leader>nh', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled) end, { desc = "toggle inlay [h]ints" })
+	vim.keymap.set('n', '<Leader>nh', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, { desc = "toggle inlay [h]ints" })
 end
 
 -- Turn off normal diagnostics because using lsp_lines
