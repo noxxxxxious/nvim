@@ -3,9 +3,16 @@ return {
   name = 'catppuccin',
   priority = 1000,
   config = function()
-    vim.opt.background = 'dark'
-    vim.cmd([[colorscheme catppuccin-macchiato]])
-    vim.cmd([[hi Normal guibg=NONE ctermbg=NONE]])
+    require'catppuccin'.setup{
+      transparent_background = true,
+      color_overrides = {
+        all = {
+          peach = '#eed49f'
+        }
+      }
+    }
+
+    vim.cmd.colorscheme "catppuccin-macchiato"
   end,
 }
 

@@ -1,0 +1,4 @@
+-- local currentBuffer = vim.api.nvim_get_current_buf()
+-- vim.cmd([[Trouble symbols open focus=false pinned=true win.relative=win win.position=right]])
+-- vim.cmd([[NvimTreeOpen]])
+-- vim.api.nvim_set_current_buf(currentBuffer)

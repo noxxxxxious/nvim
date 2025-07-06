@@ -1,4 +1,4 @@
 return {
-	"aasim-a/scrolleof.nvim",
-	opts = {}
+  "aasim-a/scrolleof.nvim",
+  opts = {}
 }

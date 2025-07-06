@@ -9,6 +9,7 @@ return { -- Highlight, edit, and navigate code
       'c',
       'cpp',
       'diff',
+      'ennex',
       'go',
       'html',
       'javascript',

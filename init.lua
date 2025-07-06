@@ -1,2 +1,7 @@
 require("nox.core")
 require("nox.lazy")
+require("nox.customK")
+require("nox.jumppack")
+require("nox.after.trouble")
+require("nox.after.last")
+require("nox.after.ennex")

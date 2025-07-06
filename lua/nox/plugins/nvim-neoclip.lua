@@ -6,6 +6,6 @@ return {
   },
   config = function()
     require('neoclip').setup()
-		vim.keymap.set('n', '<leader>sy', ':Telescope neoclip<CR>', { desc = '[S]earch previous [Y]anks' })
+    vim.keymap.set('n', '<leader>sy', ':Telescope neoclip<CR>', { desc = '[S]earch previous [Y]anks' })
   end,
 }
